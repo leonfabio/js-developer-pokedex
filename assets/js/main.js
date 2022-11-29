@@ -1,13 +1,16 @@
 const pokemonList = document.getElementById('pokemonList')
 const loadMoreButton = document.getElementById('loadMoreButton')
+const modal = document.getElementById('myModal');
+const span = document.getElementsByClassName('close')[0];
 
 const maxRecords = 151
 const limit = 10
 let offset = 0;
 
 function convertPokemonToLi(pokemon) {
+    
     return `
-        <li class="pokemon ${pokemon.type}">
+        <li onclick="abreModal()" class="pokemon ${pokemon.type}">
             <span class="number">#${pokemon.number}</span>
             <span class="name">${pokemon.name}</span>
 
@@ -45,3 +48,20 @@ loadMoreButton.addEventListener('click', () => {
         loadPokemonItens(offset, limit)
     }
 })
+
+function abreModal() {
+    modal.style.display = "block";
+  }
+
+// Quando o usuario clical no <span> (x), fecha o modal
+span.addEventListener('click', () =>{
+  modal.style.display = "none";
+})
+
+// Fecha o modal com clique fora dele
+window.addEventListener('click', (event) => {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+})
+
